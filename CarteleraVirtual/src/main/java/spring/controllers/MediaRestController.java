@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import interfacesDAO.MediaDAO;
+import spring.dao.interfaces.MediaDAO;
 import model.Media;
 
 public class MediaRestController {

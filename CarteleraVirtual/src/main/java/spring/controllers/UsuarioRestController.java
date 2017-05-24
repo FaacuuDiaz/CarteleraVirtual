@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import interfacesDAO.UsuarioDAO;
+import spring.dao.interfaces.UsuarioDAO;
 import model.Usuario;
 
 @RestController
@@ -34,7 +34,7 @@ public class UsuarioRestController {
 
 	// Recupero un usuario dado
 	@RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Usuario> recuperar(@PathVariable("id") int id) {
+	public ResponseEntity<Usuario> recuperar(@PathVariable("id") Integer id) {
 
 		System.out.println("Obteniendo usuario con id " + id);
 		Usuario user = usuarioDAO.recuperar(id);

@@ -7,8 +7,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import interfacesDAO.CarteleraDAO;
-import interfacesDAO.UsuarioDAO;
+import spring.dao.interfaces.CarteleraDAO;
+import spring.dao.interfaces.UsuarioDAO;
 import model.Cartelera;
 import model.Usuario;
 
@@ -32,5 +32,23 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 			return null;
 		}
 
+	}
+	
+	@Override
+	public Usuario recuperar(Integer id){
+		Usuario user = getEntityManager().find(Usuario.class, id);
+		return user;
+	}
+	
+	@Override
+	public boolean existe(Integer id){
+		Usuario user = getEntityManager().find(Usuario.class, id);
+		if(user == null){
+			return false;
+		}
+		else{
+			return true;
+		}
+		
 	}
 }

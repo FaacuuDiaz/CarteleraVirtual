@@ -2,7 +2,7 @@ package spring.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import interfacesDAO.CarteleraDAO;
+import spring.dao.interfaces.CarteleraDAO;
 import model.Cartelera;
 
 @Repository

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import interfacesDAO.ComentarioDAO;
+import spring.dao.interfaces.ComentarioDAO;
 import model.Comentario;
 
 @RestController

@@ -2,7 +2,7 @@ package spring.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import interfacesDAO.PublicacionDAO;
+import spring.dao.interfaces.PublicacionDAO;
 
 import model.Publicacion;
 

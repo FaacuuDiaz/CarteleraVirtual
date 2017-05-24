@@ -3,21 +3,30 @@ package spring.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import interfacesDAO.GenericDAO;
+import spring.dao.interfaces.GenericDAO;
 import model.Media;
 
 @Transactional
+@Repository
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	protected Class<T> persistentClass;
+	private EntityManagerFactory em = Persistence.createEntityManagerFactory("unidad");
+	
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager entityManager = this.em.createEntityManager();
 
+	public GenericDAOHibernateJPA() {
+		
+	}
+	
 	public GenericDAOHibernateJPA(Class<T> class1) {
 		persistentClass = class1;
 	}
-
+	@PersistenceContext
 	public void setEntityManager(EntityManager em) {
 		this.entityManager = em;
 	}
@@ -27,19 +36,28 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 
 	public T persistir(T entity) {
-		this.getEntityManager().persist(entity);
+		this.entityManager.persist(entity);
 		return entity;
 	}
-		
+
 	public void agregar(Object cartelera){
-		this.entityManager = null;//this.em.createEntityManager();
+		this.entityManager = this.em.createEntityManager();
 		EntityTransaction etx = entityManager.getTransaction();
 		etx.begin();
 		entityManager.persist(cartelera);
 		etx.commit();
 		entityManager.close();
 	}
-
+	
+	public void eliminar(T entity) {
+		entityManager = em.createEntityManager();
+		EntityTransaction etx = entityManager.getTransaction();
+		etx.begin();
+		entityManager.remove(entityManager.merge(entity));
+		etx.commit();
+		entityManager.close();		
+	}
+	
 	public boolean existe(Integer id) {
 		Query consulta = this.getEntityManager()
 				.createQuery("select e from " + getPersistentClass().getSimpleName() + " e where e.id=id");
@@ -63,7 +81,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}*/
 
 	public List<T> recuperarTodos() {
-		Query consulta = this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName());
+		Query consulta = this.entityManager.createQuery("from " + getPersistentClass().getSimpleName());
 		List<T> resultado = (List<T>) consulta.getResultList();
 		if (resultado.size() != 0) {
 			return resultado;
@@ -77,14 +95,14 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 
 	public T recuperar(Integer id) {
-		Query consulta = this.getEntityManager()
+		/*Query consulta = this.getEntityManager()
 				.createQuery("select e from " + getPersistentClass().getSimpleName() + " e where e.id=id");
 		List<T> resultado = (List<T>) consulta.getResultList();
 		if (resultado.size() != 0) {
 			return resultado.get(0);
-		} else {
+		} else {*/
 			return null;
-		}
+		//}
 	}
 
 	public T eliminar(Serializable id) {
@@ -94,23 +112,23 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 		}
 		return entity;
 	}
-
-	@Override
-	public T actualizar(T Objeto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void eliminar(T entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public T eliminar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		T entity = (T) em.createEntityManager().find(this.getPersistentClass(), id);
+		if (entity != null) {
+			this.eliminar(entity);
+		}
+		return entity;
+	}
+	@Override
+	public T actualizar(T objetoPersistible) {
+		entityManager = em.createEntityManager();
+		EntityTransaction etx = entityManager.getTransaction();
+		etx.begin();
+		entityManager.merge(objetoPersistible);
+		etx.commit();
+		entityManager.close();
+		return objetoPersistible;
 	}
 }
 

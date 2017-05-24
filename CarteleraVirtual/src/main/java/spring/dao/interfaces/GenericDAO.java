@@ -6,7 +6,7 @@ import java.io.Serializable;
 public interface GenericDAO<T> {
 	public List<T> recuperarTodos();
 
-	public T eliminar(T objeto);
+	public void eliminar(T objeto);
 
 	public T eliminar(Serializable objeto);
 
@@ -17,4 +17,8 @@ public interface GenericDAO<T> {
 	public T recuperar(Integer id);
 
 	public boolean existe(Integer id);
+
+	T actualizar(T Objeto);
+
+	T eliminar(int id);
 }

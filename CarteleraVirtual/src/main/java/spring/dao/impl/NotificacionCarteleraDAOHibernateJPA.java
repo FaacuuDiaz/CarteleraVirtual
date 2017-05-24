@@ -2,7 +2,7 @@ package spring.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import interfacesDAO.NotificacionCarteleraDAO;
+import spring.dao.interfaces.NotificacionCarteleraDAO;
 import model.NotificacionCartelera;
 
 @Repository

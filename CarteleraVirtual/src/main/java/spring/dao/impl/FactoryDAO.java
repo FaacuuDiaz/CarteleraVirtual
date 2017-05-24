@@ -1,6 +1,6 @@
 package spring.dao.impl;
 
-import interfacesDAO.*;
+import spring.dao.interfaces.*;
 
 public class FactoryDAO {
 	public CarteleraDAO getCarteleraDAO() {

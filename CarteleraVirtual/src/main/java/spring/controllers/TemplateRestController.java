@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import interfacesDAO.TemplateDAO;
+import spring.dao.interfaces.TemplateDAO;
 import model.Template;
 
 public class TemplateRestController {

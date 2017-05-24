@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import interfacesDAO.PublicacionDAO;
+import spring.dao.interfaces.PublicacionDAO;
 import model.Publicacion;
 
 public class PublicacionRestController {

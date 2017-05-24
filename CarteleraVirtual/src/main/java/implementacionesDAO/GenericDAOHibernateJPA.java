@@ -77,7 +77,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}*/
 
 	public List<T> recuperarTodos() {
-		Query consulta = this.entityManager.createQuery("select e from " + getPersistentClass().getSimpleName());
+		Query consulta = this.entityManager.createQuery("from " + getPersistentClass().getSimpleName());
 		List<T> resultado = (List<T>) consulta.getResultList();
 		if (resultado.size() != 0) {
 			return resultado;
@@ -91,14 +91,14 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 
 	public T recuperar(Integer id) {
-		Query consulta = this.getEntityManager()
+		/*Query consulta = this.getEntityManager()
 				.createQuery("select e from " + getPersistentClass().getSimpleName() + " e where e.id=id");
 		List<T> resultado = (List<T>) consulta.getResultList();
 		if (resultado.size() != 0) {
 			return resultado.get(0);
-		} else {
+		} else {*/
 			return null;
-		}
+		//}
 	}
 
 	public T eliminar(Serializable id) {

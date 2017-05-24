@@ -2,7 +2,7 @@ package spring.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import interfacesDAO.ComentarioDAO;
+import spring.dao.interfaces.ComentarioDAO;
 import model.Comentario;
 
 @Repository

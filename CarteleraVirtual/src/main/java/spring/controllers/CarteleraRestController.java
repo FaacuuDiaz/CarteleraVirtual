@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import interfacesDAO.CarteleraDAO;
+import spring.dao.interfaces.CarteleraDAO;
 import model.Cartelera;
 
 @RestController

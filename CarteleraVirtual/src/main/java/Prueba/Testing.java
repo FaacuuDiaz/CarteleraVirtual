@@ -57,6 +57,8 @@ public class Testing extends HttpServlet {
 		 Usuario u2 =new Usuario("Emilianas","1234");
 		 user.agregar(u2);
 		 System.out.println("hace el persistir del otro usuario");
+		 
+		 
 		
 		/*ResponseEntity<List<Usuario>> usuarios = (ResponseEntity<List<Usuario>>) usuario.recuperarTodos();
 		for (Usuario uu : usuarios.getBody()) {
