@@ -13,6 +13,9 @@ public class Usuario {
 	@Column(name = "idUsuario")
 	private Integer idUsuario;
 
+	@Column(name = "token")
+	private String token;
+	
 	private String usuario;
 	private String clave;
 	private String rol;
@@ -80,5 +83,10 @@ public class Usuario {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public void setToken(String jwtToken) {
+		this.token= jwtToken;
+		
 	}
 }

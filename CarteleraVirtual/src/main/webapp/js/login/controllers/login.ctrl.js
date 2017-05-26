@@ -5,6 +5,7 @@ angular.module('myapp.login')
   $scope.login = function(){
     console.log('Usuario: ' + $scope.username);
     console.log('Password: ' + $scope.password);
+    console.log('estoy en el login.ctrl.js va a hacer la funcion loginservices.js');
 
     LoginService.login($scope.username, $scope.password)
     .then(function(){

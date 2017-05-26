@@ -1,6 +1,10 @@
 package spring.controllers;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import spring.dao.interfaces.UsuarioDAO;
 import model.Usuario;
 
@@ -94,7 +100,7 @@ public class UsuarioRestController {
 	}
 
 	// Chequeo loguin
-	@RequestMapping(value = "/usuarios/chequearloguin", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/usuarios/chequearloguin", method = RequestMethod.POST)
 	public ResponseEntity<Usuario> chequearLoguinAlumno(@RequestBody Usuario user, @RequestBody String clave) {
 		Usuario usuario = usuarioDAO.recuperar(user.getId());
 		if (usuario == null) {
@@ -103,5 +109,37 @@ public class UsuarioRestController {
 			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 		} else
 			return new ResponseEntity<Usuario>(usuario, HttpStatus.UNAUTHORIZED);
+	}*/
+	
+	// Chequeo loguin
+	@RequestMapping(value = "/login",method = RequestMethod.POST)
+	public ResponseEntity<Usuario> login(@RequestBody Usuario login) throws ServletException {
+
+	    String jwtToken = "";
+
+	    if (login.getUsuario() == null || login.getClave() == null) {
+	        throw new ServletException("Please fill in username and password");
+	    }
+
+	   String nombreUsuario = login.getUsuario();//getNombreUsuario();
+	   String password = login.getClave();
+
+	    Usuario user = usuarioDAO.chequearAutenticacion(nombreUsuario, password);
+
+	    if (user == null) {
+	        throw new ServletException("User not found.");
+	    }
+
+	    String pwd = user.getClave();
+	    
+	    if (!password.equals(pwd)) {
+	        throw new ServletException("Invalid login. Please check your name and password.");
+	    }
+
+	    jwtToken = Jwts.builder().setSubject("dieseveron@gmail.com").claim("roles", "user").setIssuedAt(new Date())
+	            .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+	    user.setToken(jwtToken);
+	    
+	    return new ResponseEntity<Usuario>(user, HttpStatus.OK);
 	}
 }

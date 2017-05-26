@@ -10,10 +10,11 @@ angular.module('myapp.login')
   
   var login = function(user, password) {
     var defer = $q.defer();
-    $http.post(ENV.endpoint.url + '/login',
+    //ENV.endpoint.url
+    $http.post('http://localhost:9090/CarteleraVirtual/login',
     {
-      'userLogin': user,
-      'password': password
+      'usuario': user,
+      'clave': password
     }, config)
     .success(function(data){
       console.log('El login responde: ');
@@ -21,6 +22,7 @@ angular.module('myapp.login')
       localStorage.setItem('tokenSeguridad', data.token);
       defer.resolve(data);
     })
+    
     .error(defer.reject);
 
     return defer.promise;

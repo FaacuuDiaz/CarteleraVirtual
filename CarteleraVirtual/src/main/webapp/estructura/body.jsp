@@ -22,15 +22,15 @@
   <script src="shared/libs/imagesloaded/imagesloaded.js"></script>
 
 	<!--  Lib core de angular -->
-  <script src="shared/libs/angular/angular.js"></script>
+  <script src="/CarteleraVirtual/shared/libs/angular/angular.js"></script>
 
-  <script src="shared/libs/angular-masonry/angular-masonry.js"></script>
+  <script src="/CarteleraVirtual/shared/libs/angular-masonry/angular-masonry.js"></script>
 
 <!-- manejar el routeo -->
-	<script type="text/javascript" src="shared/libs/angular-ui-router/release/angular-ui-router.js"></script>
+	<script type="text/javascript" src="/CarteleraVirtual/shared/libs/angular-ui-router/release/angular-ui-router.js"></script>
 
 <!-- trabajar con el localStorage del nagegador desde angular -->
-	<script type="text/javascript" src="shared/libs/angular-local-storage.js"></script>
+	<script type="text/javascript" src="/CarteleraVirtual/shared/libs/angular-local-storage.js"></script>
 
 
 <!-- ************************************************************************************************************* -->
