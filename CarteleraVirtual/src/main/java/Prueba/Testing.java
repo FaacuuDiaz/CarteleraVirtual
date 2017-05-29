@@ -34,8 +34,21 @@ public class Testing extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("entro en el servlet");
+		FactoryDAO f = new FactoryDAO();
+		System.out.println("crea el factory dao");
+		UsuarioDAO usuario = f.getUsuarioDAO();
+		
+		 //Creo 2 usuarios 
+		 UsuarioDAO user = f.getUsuarioDAO();
+		 System.out.println("crea el dao del usuario");
+		 Usuario u = new Usuario("Nachengue","1234"); 
+		 System.out.println("crea el objeto del usuario");
+		 user.agregar(u); 
+		 System.out.println("hace el persistir del usuario");
+		 Usuario u2 =new Usuario("Emilianas","1234");
+		 user.agregar(u2);
+		 System.out.println("hace el persistir del otro usuario");
 	}
 
 	/**

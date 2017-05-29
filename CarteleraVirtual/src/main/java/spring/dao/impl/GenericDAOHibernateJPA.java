@@ -13,11 +13,11 @@ import model.Media;
 @Repository
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	protected Class<T> persistentClass;
-	private EntityManagerFactory em = Persistence.createEntityManagerFactory("unidad");
+	//private EntityManagerFactory em = Persistence.createEntityManagerFactory("unidad");
 	
 
-	@PersistenceContext
-	private EntityManager entityManager = this.em.createEntityManager();
+	
+	private EntityManager entityManager = null;//this.em.createEntityManager();
 
 	public GenericDAOHibernateJPA() {
 		
@@ -41,7 +41,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 
 	public void agregar(Object cartelera){
-		this.entityManager = this.em.createEntityManager();
+		//this.entityManager = this.em.createEntityManager();
 		EntityTransaction etx = entityManager.getTransaction();
 		etx.begin();
 		entityManager.persist(cartelera);
@@ -50,7 +50,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 	
 	public void eliminar(T entity) {
-		entityManager = em.createEntityManager();
+		//entityManager = em.createEntityManager();
 		EntityTransaction etx = entityManager.getTransaction();
 		etx.begin();
 		entityManager.remove(entityManager.merge(entity));
@@ -114,7 +114,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 	@Override
 	public T eliminar(int id) {
-		T entity = (T) em.createEntityManager().find(this.getPersistentClass(), id);
+		T entity = (T) entityManager.getEntityManagerFactory().createEntityManager().find(this.getPersistentClass(), id);
 		if (entity != null) {
 			this.eliminar(entity);
 		}
@@ -122,7 +122,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 	@Override
 	public T actualizar(T objetoPersistible) {
-		entityManager = em.createEntityManager();
+		//entityManager = em.createEntityManager();
 		EntityTransaction etx = entityManager.getTransaction();
 		etx.begin();
 		entityManager.merge(objetoPersistible);

@@ -1,56 +1,71 @@
 'use strict';
-angular.module('myapp.login')
-.factory('LoginService', function(ENV, $http, $q){
+angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 
-  var config = {
-    headers : {
-      'Content-Type': 'application/json;charset=utf-8;',
-    }
-  };
-  
-  var login = function(user, password) {
-    var defer = $q.defer();
-    //ENV.endpoint.url
-    $http.post('http://localhost:9090/CarteleraVirtual/login',
-    {
-      'usuario': user,
-      'clave': password
-    }, config)
-    .success(function(data){
-      console.log('El login responde: ');
-      console.log(data);
-      localStorage.setItem('tokenSeguridad', data.token);
-      defer.resolve(data);
-    })
-    
-    .error(defer.reject);
+	var config = {
+		headers : {
+			'Content-Type' : 'application/json;charset=utf-8;',
+		}
+	};
 
-    return defer.promise;
-  };
+	var login = function(user, password) {
+		var defer = $q.defer();
+		// ENV.endpoint.url
+		// http://localhost:9090/CarteleraVirtual/login
+		$http.post('http://localhost:9090/CarteleraVirtual/login', {
+			'usuario' : user,
+			'clave' : password
+		}, config).success(function(data) {
+			console.log('El login responde: ');
+			console.log(data);
+			localStorage.setItem('tokenSeguridad', data.token);
+			defer.resolve(data);
+		})
 
-  var logout = function() {
-    var defer = $q.defer();
-    // invalido el token
-    localStorage.removeItem('tokenSeguridad');
-    defer.resolve();
+		.error(defer.reject);
 
-    return defer.promise;
-  };
+		return defer.promise;
+	};
 
-  var isLoggedIn = function() {
-    var isToken = angular.isDefined(getToken()) && getToken() !== null;
-    return isToken;
-  };
+	var rol = function(id) {
 
-  var getToken = function() {
-    return localStorage.getItem('tokenSeguridad');
-  };
+		var defer = $q.defer();
+		$http.post('http://localhost:9090/CarteleraVirtual/rol', {
+			'idUsuarioApi' : id
+		}, config).success(function(data) {
 
+			console.log('El login responde: ');
+			console.log(data);
+			defer.resolve(data);
 
-  return {
-    login: login,
-    logout: logout,
-    getToken: getToken,
-    isLoggedIn: isLoggedIn
-  };
+		}).error(defer.reject);
+
+		return defer.promise;
+
+	};
+
+	var logout = function() {
+		var defer = $q.defer();
+		// invalido el token
+		localStorage.removeItem('tokenSeguridad');
+		defer.resolve();
+
+		return defer.promise;
+	};
+
+	var isLoggedIn = function() {
+		var isToken = angular.isDefined(getToken()) && getToken() !== null;
+		return isToken;
+	};
+
+	var getToken = function() {
+		return localStorage.getItem('tokenSeguridad');
+	};
+
+	return {
+		login : login,
+		rol: rol,
+		logout : logout,
+		getToken : getToken,
+		isLoggedIn : isLoggedIn
+	};
 })

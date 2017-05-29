@@ -5,16 +5,28 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import spring.dao.interfaces.CarteleraDAO;
+import spring.dao.interfaces.UsuarioApiDAO;
 import spring.dao.interfaces.UsuarioDAO;
 import model.Cartelera;
 import model.Usuario;
+import model.UsuarioApi;
 
 @Repository
 public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> implements UsuarioDAO {
-
+	
+	@Autowired
+	UsuarioApiDAO userApiDAO;
+	
 	public UsuarioDAOHibernateJPA() {
 		super(Usuario.class);
 	}
@@ -33,6 +45,7 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		}
 
 	}
+
 	
 	@Override
 	public Usuario recuperar(Integer id){

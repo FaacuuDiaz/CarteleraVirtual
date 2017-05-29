@@ -19,7 +19,7 @@ public class Usuario {
 	private String usuario;
 	private String clave;
 	private String rol;
-	
+	private Integer idUsuarioApi;
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
@@ -34,11 +34,18 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private Collection<NotificacionCartelera> notificaciones;
-
+	
 	public Usuario(String usuario, String clave) {
 		super();
 		this.setUsuario(usuario);
 		this.setClave(clave);
+	}
+
+	public Usuario(String usuario, String clave, Integer idUsuarioApi) {
+		super();
+		this.setUsuario(usuario);
+		this.setClave(clave);
+		this.setIdUsuarioApi(idUsuarioApi);
 	}
 
 	public Usuario(){
@@ -88,5 +95,13 @@ public class Usuario {
 	public void setToken(String jwtToken) {
 		this.token= jwtToken;
 		
+	}
+
+	public Integer getIdUsuarioApi() {
+		return idUsuarioApi;
+	}
+
+	public void setIdUsuarioApi(Integer idUsuarioApi) {
+		this.idUsuarioApi = idUsuarioApi;
 	}
 }
