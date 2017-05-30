@@ -15,7 +15,7 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 			'usuario' : user,
 			'clave' : password
 		}, config).success(function(data) {
-			console.log('El login responde: ');
+			console.log('El login responde tu hermana en tanga: ');
 			console.log(data);
 			localStorage.setItem('tokenSeguridad', data.token);
 			defer.resolve(data);
@@ -33,7 +33,7 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 			'idUsuarioApi' : id
 		}, config).success(function(data) {
 
-			console.log('El login responde: ');
+			console.log('El login responde la puta que te pario: ');
 			console.log(data);
 			defer.resolve(data);
 
@@ -41,6 +41,26 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 
 		return defer.promise;
 
+	};
+	
+	var registrarme = function(user, password, rol){
+		console.log('usuario:'+user);
+		console.log('pass:'+password);
+		console.log('rol:'+rol);
+		var defer = $q.defer();
+		$http.post('http://localhost:9090/CarteleraVirtual/registrarse', {
+			'usuario' : user,
+			'clave' : password,
+			'rol' : rol
+		}, config).success(function(data) {
+
+			console.log('El login responde la concha de tu madre: ');
+			console.log(data);
+			defer.resolve(data);
+
+		}).error(defer.reject);
+
+		return defer.promise;
 	};
 
 	var logout = function() {
@@ -64,6 +84,7 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 	return {
 		login : login,
 		rol: rol,
+		registrarme: registrarme,
 		logout : logout,
 		getToken : getToken,
 		isLoggedIn : isLoggedIn

@@ -15,11 +15,14 @@ public class Usuario {
 
 	@Column(name = "token")
 	private String token;
-	
+
 	private String usuario;
+
 	private String clave;
 	private String rol;
-	private Integer idUsuarioApi;
+	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idUsuarioApi;
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore

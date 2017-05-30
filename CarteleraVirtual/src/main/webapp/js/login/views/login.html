@@ -20,6 +20,23 @@
           <a href="" ng-click="login()" class="btn btn-primary btn-md">Ingres&aacute; <i class="fa fa-sign-in"></i></a>
         </span>
       </div>
+      <br><br>
+      <h4>Registrate</h4>
+      <input type="text" id="registro_userName" ng-model="registro_username" class="form-control input-sm chat-input" placeholder="nick de Usuario" />
+      </br>
+      <select type="text" id="userRol" ng-model="userRol" class="form-control input-sm chat-input" placeholder="rol de Usuario">
+      		<option value="Alumno">Alumno</option>
+      		<option value="Administrador">Administrador</option>
+      		<option value="Profesor">Profesor</option>
+      </select>
+      <br>
+      <input type="text" id="registro_userPassword" ng-model="registro_password" class="form-control input-sm chat-input" placeholder="Contraseña" />
+      </br>
+      <div class="wrapper">
+        <span class="group-btn">
+          <a href="" ng-click="registrarme()" class="btn btn-primary btn-md">Registrarme<i class="fa fa-sign-in"></i></a>
+        </span>
+      </div>
     </div>
    </div>
   </div>

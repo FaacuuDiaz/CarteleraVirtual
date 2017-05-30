@@ -33,4 +33,14 @@ angular.module('myapp.login')
       $scope.loginErrorMessage = 'Usuario o Contraseña invalido. Por favor, vuelva a intentarlo';
     });
   }
+  
+  $scope.registrarme= function(){
+	  console.log('Usuario: ' + $scope.registro_username);
+	  console.log('Password: ' + $scope.registro_password);
+	  console.log('Rol: '+ $scope.userRol);
+	  LoginService.registrarme($scope.registro_username, $scope.registro_password,$scope.userRol).then(function(response){
+		  $state.go('login');
+	  })
+  }
+  
 });

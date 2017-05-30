@@ -5,12 +5,14 @@ import java.util.List;
 import javax.persistence.*;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import spring.dao.interfaces.GenericDAO;
 import model.Media;
 
 @Transactional
 @Repository
+@EnableTransactionManagement
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	protected Class<T> persistentClass;
 	//private EntityManagerFactory em = Persistence.createEntityManagerFactory("unidad");
@@ -34,7 +36,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
-
+	
 	public T persistir(T entity) {
 		this.entityManager.persist(entity);
 		return entity;

@@ -136,7 +136,7 @@ public class UsuarioRestController {
 	        throw new ServletException("Invalid login. Please check your name and password.");
 	    }
 
-	    jwtToken = Jwts.builder().setSubject("dieseveron@gmail.com").claim("roles", "user").setIssuedAt(new Date())
+	    jwtToken = Jwts.builder().setSubject("ucaf.diaz@gmail.com").claim("roles", "user").setIssuedAt(new Date())
 	            .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
 	    user.setToken(jwtToken);
 	    
