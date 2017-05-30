@@ -15,7 +15,7 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 			'usuario' : user,
 			'clave' : password
 		}, config).success(function(data) {
-			console.log('El login responde tu hermana en tanga: ');
+			console.log('El login responde : ');
 			console.log(data);
 			localStorage.setItem('tokenSeguridad', data.token);
 			defer.resolve(data);
@@ -33,7 +33,7 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 			'idUsuarioApi' : id
 		}, config).success(function(data) {
 
-			console.log('El login responde la puta que te pario: ');
+			console.log('El login responde : ');
 			console.log(data);
 			defer.resolve(data);
 
@@ -54,7 +54,29 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 			'rol' : rol
 		}, config).success(function(data) {
 
-			console.log('El login responde la concha de tu madre: ');
+			console.log('El login responde : ');
+			console.log(data);
+			defer.resolve(data);
+
+		}).error(defer.reject);
+
+		return defer.promise;
+	};
+	
+	var registrarmeUser = function(user, password, rol, idUserApi){
+		console.log('usuario:'+user);
+		console.log('pass:'+password);
+		console.log('rol:'+rol);
+		console.log('idUserApi:'+idUserApi);
+		var defer = $q.defer();
+		$http.post('http://localhost:9090/CarteleraVirtual/agregarUsuario', {
+			'usuario' : user,
+			'clave' : password,
+			'rol' : rol,
+			'idUsuarioApi' : idUserApi
+		}, config).success(function(data) {
+
+			console.log('El login responde user: ');
 			console.log(data);
 			defer.resolve(data);
 
@@ -85,6 +107,7 @@ angular.module('myapp.login').factory('LoginService', function(ENV, $http, $q) {
 		login : login,
 		rol: rol,
 		registrarme: registrarme,
+		registrarmeUser: registrarmeUser,
 		logout : logout,
 		getToken : getToken,
 		isLoggedIn : isLoggedIn

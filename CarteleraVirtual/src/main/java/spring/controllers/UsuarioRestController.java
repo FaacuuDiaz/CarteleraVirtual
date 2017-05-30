@@ -22,6 +22,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import spring.dao.interfaces.UsuarioDAO;
 import model.Usuario;
+import model.UsuarioApi;
 
 @RestController
 @EnableWebMvc
@@ -110,6 +111,17 @@ public class UsuarioRestController {
 		} else
 			return new ResponseEntity<Usuario>(usuario, HttpStatus.UNAUTHORIZED);
 	}*/
+	
+	@RequestMapping(value = "/agregarUsuario", method = RequestMethod.POST)
+	public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario user) {
+		System.out.println("Creando el usuario " + user.getUsuario());
+		/*if (userApiDAO.existe(user.getIdUsuarioApi())) {
+			System.out.println("Ya existe un usuario con nombre " + user.getUsuario());
+			return new ResponseEntity<UsuarioApi>(HttpStatus.CONFLICT);
+		}*/
+		usuarioDAO.persistir(user);
+		return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+	}
 	
 	// Chequeo loguin
 	@RequestMapping(value = "/login",method = RequestMethod.POST)

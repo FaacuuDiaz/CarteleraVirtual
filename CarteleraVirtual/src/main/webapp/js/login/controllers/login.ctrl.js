@@ -39,7 +39,9 @@ angular.module('myapp.login')
 	  console.log('Password: ' + $scope.registro_password);
 	  console.log('Rol: '+ $scope.userRol);
 	  LoginService.registrarme($scope.registro_username, $scope.registro_password,$scope.userRol).then(function(response){
-		  $state.go('login');
+		  LoginService.registrarmeUser($scope.registro_username, $scope.registro_password,$scope.userRol,response.idUsuarioApi).then(function(responseU){
+			  $state.go('login');
+		  })  
 	  })
   }
   

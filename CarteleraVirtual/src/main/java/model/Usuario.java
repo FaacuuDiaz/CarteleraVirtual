@@ -21,7 +21,7 @@ public class Usuario {
 	private String clave;
 	private String rol;
 	
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private int idUsuarioApi;
 	
 	@OneToMany(mappedBy = "usuario")
